@@ -1,0 +1,67 @@
+package study;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+public class Main {
+	//主方法名不要与构造方法重名 也就是不要与类重名 所以改一下大小写
+    public static void main(String[] args) {
+        Scanner scanInt = new Scanner(System.in);
+        //这边的parseInt()函数的作用是把字符串类型转化为整数类型
+        //注意从输入和输出的整数都是字符 只是看起来是整数
+        int num = Integer.parseInt(scanInt.nextLine());
+        //实例化一个链表对象 而且限定只能传入String类型的参数
+        //ArrayList在利用索引取数据上占优势 而 LinkedList在插入和删除操作上占优势
+        List<String> array = new ArrayList<String>();
+        //这边的num对应的是题目中的正整数n 每天在链表中加一个元素 n就减一 符合逻辑
+        while(num > 0){
+            String str = scanInt.nextLine();
+            array.add(str);
+            num--;
+        }
+        //注意要关闭扫描器
+        scanInt.close();
+        int min = 1000000;
+        int min_index = 0;
+        int max = 0;
+        int max_index = 0;
+        //StringBuilder与StringBuffer很类似 只不过StringBuilder不是线程安全的
+        StringBuilder maxString=new StringBuilder();
+        StringBuilder minString=new StringBuilder();
+        //length()是针对字符串String说的 而 size()是针对泛型集合来用的 看看泛型集合有多少元素
+        for (int i = 0; i < array.size(); i++) {
+          //array.get()用来得到对应下标的元素
+          //split(" ")的作用是以空格为标志进行切割 空格也消除 取而代之的是一个元素变成了好几个元素
+          //这边就产生了三个元素
+          //注意前面array的每个元素都是用nextLine()接受的
+               String x = array.get(i);
+               //temp只是个临时存储 取其需要的一个之后就不要了
+                String[] temp=x.split(" ");
+                //这边temp[2]就是代表没一行最后一个输入那个成绩
+            int temScore = Integer.parseInt(temp[2]);
+            //min和min_index都是不断替换的 找到下一个更小的就替换
+            if (min > temScore ) {
+                min = temScore;
+                min_index = i;
+            }
+            if (max < temScore) {
+                max = temScore;
+                max_index = i;
+            }
+        }
+        //这两个数组只是暂存而已 并不是最终输出格式 当然也有分割的作用
+            String[] maxTemp=array.get(max_index).split(" ");
+            String[] minTemp=array.get(min_index).split(" ");
+            //这两个数组才是用来输出的
+
+            minString.append(minTemp[0]);
+            minString.append(" ");
+            minString.append(minTemp[1]);
+
+            maxString.append(maxTemp[0]);
+            maxString.append(" ");
+            maxString.append(maxTemp[1]);
+
+            System.out.println(maxString);
+            System.out.println(minString);
+    }
+}
