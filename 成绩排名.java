@@ -12,7 +12,7 @@ public class Main {
         //实例化一个链表对象 而且限定只能传入String类型的参数
         //ArrayList在利用索引取数据上占优势 而 LinkedList在插入和删除操作上占优势
         List<String> array = new ArrayList<String>();
-        //这边的num对应的是题目中的正整数n 每天在链表中加一个元素 n就减一 符合逻辑
+        //这边的num对应的是题目中的正整数n 每天在链表中加一行记录 n就减一 符合逻辑
         while(num > 0){
             String str = scanInt.nextLine();
             array.add(str);
@@ -31,10 +31,11 @@ public class Main {
         for (int i = 0; i < array.size(); i++) {
           //array.get()用来得到对应下标的元素
           //split(" ")的作用是以空格为标志进行切割 空格也消除 取而代之的是一个元素变成了好几个元素
+          //split()中间的参数如果和正则表达式冲突的话需要用\\
           //这边就产生了三个元素
           //注意前面array的每个元素都是用nextLine()接受的
                String x = array.get(i);
-               //temp只是个临时存储 取其需要的一个之后就不要了
+               //temp只是个临时存储 取其中一个之后就不要了
                 String[] temp=x.split(" ");
                 //这边temp[2]就是代表没一行最后一个输入那个成绩
             int temScore = Integer.parseInt(temp[2]);
@@ -52,7 +53,6 @@ public class Main {
             String[] maxTemp=array.get(max_index).split(" ");
             String[] minTemp=array.get(min_index).split(" ");
             //这两个数组才是用来输出的
-
             minString.append(minTemp[0]);
             minString.append(" ");
             minString.append(minTemp[1]);
